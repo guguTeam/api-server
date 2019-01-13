@@ -8,5 +8,5 @@ mod protocol;
 mod server;
 
 fn main() {
-server::run("0.0.0.0", 19132);
+    server::run("0.0.0.0", 19132);
 }
