@@ -3,8 +3,6 @@ use std::thread;
 use websocket::sync::Server;
 use websocket::OwnedMessage;
 
-use rmp;
-
 use protocol;
 
 pub fn run(ip: &str, port: i32) {
@@ -18,7 +16,9 @@ pub fn run(ip: &str, port: i32) {
 
             let (mut receiver, mut sender) = client.split().unwrap();
 
-            sender.send_message(&OwnedMessage::Text("Hello".to_string()));
+if let OwnedMessage::Text(t) = receiver.recv_message().unwrap() {
+println!("{}", t);
+}
 
             if let OwnedMessage::Binary(b) = receiver.recv_message().unwrap() {
                 let pk = protocol::authorization_packet::encode(b);

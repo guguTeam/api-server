@@ -1,4 +1,4 @@
-use rmp;
+use stream::Stream;
 
 pub struct AuthorizationPacket {
     pub password: String
@@ -7,6 +7,7 @@ pub struct AuthorizationPacket {
 impl AuthorizationPacket {}
 
 pub fn encode(b: Vec<u8>) -> AuthorizationPacket {
-    let mut out = [0u8; 16];
-    AuthorizationPacket { password: String::from(rmp::decode::read_str(&mut &b[..], &mut out).unwrap()) }
+let s = Stream::new(b);
+println!("{}", s.get_index());
+    AuthorizationPacket { password: String::new() }
 }
